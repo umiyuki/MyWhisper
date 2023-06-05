@@ -129,6 +129,12 @@
   <data name="Delete_Selected_Items" xml:space="preserve">
     <value>選択した項目を削除</value>
   </data>
+  <data name="Device" xml:space="preserve">
+    <value>デバイス</value>
+  </data>
+  <data name="DeviceID" xml:space="preserve">
+    <value>デバイスID</value>
+  </data>
   <data name="FormTitle" xml:space="preserve">
     <value>MyWhisper</value>
   </data>
@@ -147,6 +153,9 @@
   <data name="Model" xml:space="preserve">
     <value>モデル</value>
   </data>
+  <data name="No" xml:space="preserve">
+    <value>いいえ</value>
+  </data>
   <data name="Num_Processes" xml:space="preserve">
     <value>プロセス数</value>
   </data>
@@ -161,5 +170,11 @@
   </data>
   <data name="Start_Transcribe" xml:space="preserve">
     <value>文字起こし開始</value>
+  </data>
+  <data name="VADFilter" xml:space="preserve">
+    <value>無音部除去</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>はい</value>
   </data>
 </root>

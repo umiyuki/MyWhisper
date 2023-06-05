@@ -129,6 +129,12 @@
   <data name="Delete_Selected_Items" xml:space="preserve">
     <value>Delete selected items</value>
   </data>
+  <data name="Device" xml:space="preserve">
+    <value>Device</value>
+  </data>
+  <data name="DeviceID" xml:space="preserve">
+    <value>DeviceID</value>
+  </data>
   <data name="FormTitle" xml:space="preserve">
     <value>MyWhisper</value>
   </data>
@@ -147,6 +153,9 @@
   <data name="Model" xml:space="preserve">
     <value>Model</value>
   </data>
+  <data name="No" xml:space="preserve">
+    <value>No</value>
+  </data>
   <data name="Num_Processes" xml:space="preserve">
     <value>Num Processes</value>
   </data>
@@ -161,5 +170,11 @@
   </data>
   <data name="Start_Transcribe" xml:space="preserve">
     <value>Start Transcribe</value>
+  </data>
+  <data name="VADFilter" xml:space="preserve">
+    <value>VADFilter</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>Yes</value>
   </data>
 </root>

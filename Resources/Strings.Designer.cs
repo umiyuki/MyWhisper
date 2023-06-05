@@ -97,6 +97,24 @@ namespace WinWisper.Resources {
         }
         
         /// <summary>
+        ///   Device に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Device {
+            get {
+                return ResourceManager.GetString("Device", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   DeviceID に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string DeviceID {
+            get {
+                return ResourceManager.GetString("DeviceID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   MyWhisper に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string FormTitle {
@@ -151,6 +169,15 @@ namespace WinWisper.Resources {
         }
         
         /// <summary>
+        ///   No に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string No {
+            get {
+                return ResourceManager.GetString("No", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Num Processes に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string Num_Processes {
@@ -192,6 +219,24 @@ namespace WinWisper.Resources {
         public static string Start_Transcribe {
             get {
                 return ResourceManager.GetString("Start_Transcribe", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   VADFilter に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string VADFilter {
+            get {
+                return ResourceManager.GetString("VADFilter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Yes に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Yes {
+            get {
+                return ResourceManager.GetString("Yes", resourceCulture);
             }
         }
     }

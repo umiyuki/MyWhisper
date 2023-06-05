@@ -57,7 +57,7 @@ namespace WinWisper
             this.label1.Padding = new System.Windows.Forms.Padding(5);
             this.label1.Size = new System.Drawing.Size(173, 70);
             this.label1.TabIndex = 1;
-            this.label1.Text = "MyWhisper\r\nv1.0.1\r\nAuther: うみゆき(Umiyuki)\r\nSoy-Software";
+            this.label1.Text = "MyWhisper\r\nv1.1.0\r\nAuther: うみゆき(Umiyuki)\r\nSoy-Software";
             // 
             // linkLabel1
             // 
@@ -75,10 +75,9 @@ namespace WinWisper
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(12, 131);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(222, 60);
+            this.label2.Size = new System.Drawing.Size(265, 132);
             this.label2.TabIndex = 3;
-            this.label2.Text = "Whisper by OpenAI\r\nhttps://github.com/openai/whisper\r\n\r\nwhisper.cpp by ggerganov\r" +
-    "\nhttps://github.com/ggerganov/whisper.cpp";
+            this.label2.Text = resources.GetString("label2.Text");
             // 
             // Form_About
             // 

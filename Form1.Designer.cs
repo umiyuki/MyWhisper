@@ -38,6 +38,7 @@ namespace WinWisper
             this.ファイルリストをクリアToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.選択した項目を削除ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.outputBox = new System.Windows.Forms.TextBox();
             this.lavelVersion = new System.Windows.Forms.Label();
@@ -51,9 +52,12 @@ namespace WinWisper
             this.labelLanguage = new System.Windows.Forms.Label();
             this.cmbOutputFormat = new System.Windows.Forms.ComboBox();
             this.labelOutput = new System.Windows.Forms.Label();
-            this.cmbProcessor = new System.Windows.Forms.ComboBox();
-            this.labelProcesses = new System.Windows.Forms.Label();
-            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmbDeviceID = new System.Windows.Forms.ComboBox();
+            this.labelDeviceID = new System.Windows.Forms.Label();
+            this.cmbDevice = new System.Windows.Forms.ComboBox();
+            this.labelDevice = new System.Windows.Forms.Label();
+            this.cmbVADFilter = new System.Windows.Forms.ComboBox();
+            this.labelVADFilter = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -61,23 +65,17 @@ namespace WinWisper
             // 
             this.fileList.AllowDrop = true;
             this.fileList.FormattingEnabled = true;
-            this.fileList.ItemHeight = 12;
-            this.fileList.Location = new System.Drawing.Point(12, 27);
+            resources.ApplyResources(this.fileList, "fileList");
             this.fileList.Name = "fileList";
             this.fileList.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-            this.fileList.Size = new System.Drawing.Size(392, 220);
-            this.fileList.TabIndex = 0;
             this.fileList.DragDrop += new System.Windows.Forms.DragEventHandler(this.fileList_DragDrop);
             this.fileList.DragEnter += new System.Windows.Forms.DragEventHandler(this.fileList_DragEnter);
             this.fileList.KeyDown += new System.Windows.Forms.KeyEventHandler(this.fileList_KeyDown);
             // 
             // btnTranscribe
             // 
-            this.btnTranscribe.Location = new System.Drawing.Point(13, 262);
+            resources.ApplyResources(this.btnTranscribe, "btnTranscribe");
             this.btnTranscribe.Name = "btnTranscribe";
-            this.btnTranscribe.Size = new System.Drawing.Size(103, 23);
-            this.btnTranscribe.TabIndex = 1;
-            this.btnTranscribe.Text = "文字起こし開始";
             this.btnTranscribe.UseVisualStyleBackColor = true;
             this.btnTranscribe.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -87,11 +85,8 @@ namespace WinWisper
             this.ファイルToolStripMenuItem,
             this.toolStripMenuItem1,
             this.aboutToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            resources.ApplyResources(this.menuStrip1, "menuStrip1");
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(694, 24);
-            this.menuStrip1.TabIndex = 2;
-            this.menuStrip1.Text = "menuStrip1";
             // 
             // ファイルToolStripMenuItem
             // 
@@ -100,180 +95,156 @@ namespace WinWisper
             this.ファイルリストをクリアToolStripMenuItem,
             this.選択した項目を削除ToolStripMenuItem});
             this.ファイルToolStripMenuItem.Name = "ファイルToolStripMenuItem";
-            this.ファイルToolStripMenuItem.Size = new System.Drawing.Size(53, 20);
-            this.ファイルToolStripMenuItem.Text = "ファイル";
+            resources.ApplyResources(this.ファイルToolStripMenuItem, "ファイルToolStripMenuItem");
             // 
             // ファイルを追加ToolStripMenuItem
             // 
             this.ファイルを追加ToolStripMenuItem.Name = "ファイルを追加ToolStripMenuItem";
-            this.ファイルを追加ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.ファイルを追加ToolStripMenuItem.Text = "ファイルを追加";
+            resources.ApplyResources(this.ファイルを追加ToolStripMenuItem, "ファイルを追加ToolStripMenuItem");
             this.ファイルを追加ToolStripMenuItem.Click += new System.EventHandler(this.ファイルを追加ToolStripMenuItem_Click);
             // 
             // ファイルリストをクリアToolStripMenuItem
             // 
             this.ファイルリストをクリアToolStripMenuItem.Name = "ファイルリストをクリアToolStripMenuItem";
-            this.ファイルリストをクリアToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.ファイルリストをクリアToolStripMenuItem.Text = "ファイルリストをクリア";
+            resources.ApplyResources(this.ファイルリストをクリアToolStripMenuItem, "ファイルリストをクリアToolStripMenuItem");
             this.ファイルリストをクリアToolStripMenuItem.Click += new System.EventHandler(this.ファイルリストをクリアToolStripMenuItem_Click);
             // 
             // 選択した項目を削除ToolStripMenuItem
             // 
             this.選択した項目を削除ToolStripMenuItem.Name = "選択した項目を削除ToolStripMenuItem";
-            this.選択した項目を削除ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.選択した項目を削除ToolStripMenuItem.Text = "選択した項目を削除";
+            resources.ApplyResources(this.選択した項目を削除ToolStripMenuItem, "選択した項目を削除ToolStripMenuItem");
             this.選択した項目を削除ToolStripMenuItem.Click += new System.EventHandler(this.選択した項目を削除ToolStripMenuItem_Click);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(12, 20);
+            resources.ApplyResources(this.toolStripMenuItem1, "toolStripMenuItem1");
+            // 
+            // aboutToolStripMenuItem
+            // 
+            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
+            resources.ApplyResources(this.aboutToolStripMenuItem, "aboutToolStripMenuItem");
+            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
             // statusStrip1
             // 
-            this.statusStrip1.Location = new System.Drawing.Point(0, 428);
+            resources.ApplyResources(this.statusStrip1, "statusStrip1");
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(694, 22);
-            this.statusStrip1.TabIndex = 3;
-            this.statusStrip1.Text = "statusStrip1";
             // 
             // outputBox
             // 
-            this.outputBox.Location = new System.Drawing.Point(13, 305);
-            this.outputBox.Multiline = true;
+            resources.ApplyResources(this.outputBox, "outputBox");
             this.outputBox.Name = "outputBox";
-            this.outputBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.outputBox.Size = new System.Drawing.Size(658, 120);
-            this.outputBox.TabIndex = 5;
             // 
             // lavelVersion
             // 
-            this.lavelVersion.AutoSize = true;
-            this.lavelVersion.Location = new System.Drawing.Point(638, 438);
+            resources.ApplyResources(this.lavelVersion, "lavelVersion");
             this.lavelVersion.Name = "lavelVersion";
-            this.lavelVersion.Size = new System.Drawing.Size(33, 12);
-            this.lavelVersion.TabIndex = 6;
-            this.lavelVersion.Text = "v1.0.1";
             // 
             // progressBar
             // 
-            this.progressBar.Location = new System.Drawing.Point(148, 428);
+            resources.ApplyResources(this.progressBar, "progressBar");
             this.progressBar.Name = "progressBar";
-            this.progressBar.Size = new System.Drawing.Size(363, 21);
-            this.progressBar.TabIndex = 7;
             // 
             // labelProgress
             // 
-            this.labelProgress.AutoSize = true;
-            this.labelProgress.Location = new System.Drawing.Point(13, 432);
+            resources.ApplyResources(this.labelProgress, "labelProgress");
             this.labelProgress.Name = "labelProgress";
-            this.labelProgress.Size = new System.Drawing.Size(0, 12);
-            this.labelProgress.TabIndex = 8;
             // 
             // labelModel
             // 
-            this.labelModel.AutoSize = true;
-            this.labelModel.Location = new System.Drawing.Point(411, 28);
+            resources.ApplyResources(this.labelModel, "labelModel");
             this.labelModel.Name = "labelModel";
-            this.labelModel.Size = new System.Drawing.Size(34, 12);
-            this.labelModel.TabIndex = 9;
-            this.labelModel.Text = "モデル";
             // 
             // cmbModel
             // 
             this.cmbModel.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbModel.FormattingEnabled = true;
-            this.cmbModel.Location = new System.Drawing.Point(500, 25);
+            resources.ApplyResources(this.cmbModel, "cmbModel");
             this.cmbModel.Name = "cmbModel";
-            this.cmbModel.Size = new System.Drawing.Size(121, 20);
-            this.cmbModel.TabIndex = 10;
             // 
             // cmbThreads
             // 
             this.cmbThreads.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbThreads.FormattingEnabled = true;
-            this.cmbThreads.Location = new System.Drawing.Point(500, 51);
+            resources.ApplyResources(this.cmbThreads, "cmbThreads");
             this.cmbThreads.Name = "cmbThreads";
-            this.cmbThreads.Size = new System.Drawing.Size(121, 20);
-            this.cmbThreads.TabIndex = 12;
             // 
             // labelThreads
             // 
-            this.labelThreads.AutoSize = true;
-            this.labelThreads.Location = new System.Drawing.Point(411, 54);
+            resources.ApplyResources(this.labelThreads, "labelThreads");
             this.labelThreads.Name = "labelThreads";
-            this.labelThreads.Size = new System.Drawing.Size(51, 12);
-            this.labelThreads.TabIndex = 11;
-            this.labelThreads.Text = "スレッド数";
             // 
             // cmbLanguage
             // 
             this.cmbLanguage.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbLanguage.FormattingEnabled = true;
-            this.cmbLanguage.Location = new System.Drawing.Point(500, 103);
+            resources.ApplyResources(this.cmbLanguage, "cmbLanguage");
             this.cmbLanguage.Name = "cmbLanguage";
-            this.cmbLanguage.Size = new System.Drawing.Size(121, 20);
-            this.cmbLanguage.TabIndex = 14;
             // 
             // labelLanguage
             // 
-            this.labelLanguage.AutoSize = true;
-            this.labelLanguage.Location = new System.Drawing.Point(411, 106);
+            resources.ApplyResources(this.labelLanguage, "labelLanguage");
             this.labelLanguage.Name = "labelLanguage";
-            this.labelLanguage.Size = new System.Drawing.Size(29, 12);
-            this.labelLanguage.TabIndex = 13;
-            this.labelLanguage.Text = "言語";
             // 
             // cmbOutputFormat
             // 
             this.cmbOutputFormat.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbOutputFormat.FormattingEnabled = true;
-            this.cmbOutputFormat.Location = new System.Drawing.Point(500, 129);
+            resources.ApplyResources(this.cmbOutputFormat, "cmbOutputFormat");
             this.cmbOutputFormat.Name = "cmbOutputFormat";
-            this.cmbOutputFormat.Size = new System.Drawing.Size(121, 20);
-            this.cmbOutputFormat.TabIndex = 16;
             // 
             // labelOutput
             // 
-            this.labelOutput.AutoSize = true;
-            this.labelOutput.Location = new System.Drawing.Point(411, 132);
+            resources.ApplyResources(this.labelOutput, "labelOutput");
             this.labelOutput.Name = "labelOutput";
-            this.labelOutput.Size = new System.Drawing.Size(53, 12);
-            this.labelOutput.TabIndex = 15;
-            this.labelOutput.Text = "出力形式";
             // 
-            // cmbProcessor
+            // cmbDeviceID
             // 
-            this.cmbProcessor.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbProcessor.FormattingEnabled = true;
-            this.cmbProcessor.Location = new System.Drawing.Point(500, 77);
-            this.cmbProcessor.Name = "cmbProcessor";
-            this.cmbProcessor.Size = new System.Drawing.Size(121, 20);
-            this.cmbProcessor.TabIndex = 18;
+            this.cmbDeviceID.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbDeviceID.FormattingEnabled = true;
+            resources.ApplyResources(this.cmbDeviceID, "cmbDeviceID");
+            this.cmbDeviceID.Name = "cmbDeviceID";
             // 
-            // labelProcesses
+            // labelDeviceID
             // 
-            this.labelProcesses.AutoSize = true;
-            this.labelProcesses.Location = new System.Drawing.Point(411, 80);
-            this.labelProcesses.Name = "labelProcesses";
-            this.labelProcesses.Size = new System.Drawing.Size(54, 12);
-            this.labelProcesses.TabIndex = 17;
-            this.labelProcesses.Text = "プロセス数";
+            resources.ApplyResources(this.labelDeviceID, "labelDeviceID");
+            this.labelDeviceID.Name = "labelDeviceID";
             // 
-            // aboutToolStripMenuItem
+            // cmbDevice
             // 
-            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(50, 20);
-            this.aboutToolStripMenuItem.Text = "about";
-            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
+            this.cmbDevice.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbDevice.FormattingEnabled = true;
+            resources.ApplyResources(this.cmbDevice, "cmbDevice");
+            this.cmbDevice.Name = "cmbDevice";
+            // 
+            // labelDevice
+            // 
+            resources.ApplyResources(this.labelDevice, "labelDevice");
+            this.labelDevice.Name = "labelDevice";
+            // 
+            // cmbVADFilter
+            // 
+            this.cmbVADFilter.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbVADFilter.FormattingEnabled = true;
+            resources.ApplyResources(this.cmbVADFilter, "cmbVADFilter");
+            this.cmbVADFilter.Name = "cmbVADFilter";
+            // 
+            // labelVADFilter
+            // 
+            resources.ApplyResources(this.labelVADFilter, "labelVADFilter");
+            this.labelVADFilter.Name = "labelVADFilter";
             // 
             // MyWhisper
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(694, 450);
-            this.Controls.Add(this.cmbProcessor);
-            this.Controls.Add(this.labelProcesses);
+            this.Controls.Add(this.cmbVADFilter);
+            this.Controls.Add(this.labelVADFilter);
+            this.Controls.Add(this.cmbDeviceID);
+            this.Controls.Add(this.labelDeviceID);
+            this.Controls.Add(this.cmbDevice);
+            this.Controls.Add(this.labelDevice);
             this.Controls.Add(this.cmbOutputFormat);
             this.Controls.Add(this.labelOutput);
             this.Controls.Add(this.cmbLanguage);
@@ -291,12 +262,10 @@ namespace WinWisper
             this.Controls.Add(this.fileList);
             this.Controls.Add(this.menuStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.MaximizeBox = false;
             this.Name = "MyWhisper";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
-            this.Text = "MyWhisper";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MyWhisper_FormClosing);
             this.Load += new System.EventHandler(this.MyWhisper_Load);
             this.menuStrip1.ResumeLayout(false);
@@ -328,10 +297,14 @@ namespace WinWisper
         private System.Windows.Forms.Label labelLanguage;
         private System.Windows.Forms.ComboBox cmbOutputFormat;
         private System.Windows.Forms.Label labelOutput;
-        private System.Windows.Forms.ComboBox cmbProcessor;
-        private System.Windows.Forms.Label labelProcesses;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
+        private System.Windows.Forms.ComboBox cmbDeviceID;
+        private System.Windows.Forms.Label labelDeviceID;
+        private System.Windows.Forms.ComboBox cmbDevice;
+        private System.Windows.Forms.Label labelDevice;
+        private System.Windows.Forms.ComboBox cmbVADFilter;
+        private System.Windows.Forms.Label labelVADFilter;
     }
 }
 

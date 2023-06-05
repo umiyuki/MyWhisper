@@ -7,11 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using MediaToolkit;
-using MediaToolkit.Model;
 using System.IO;
-using MediaToolkit.Options;
-using NAudio.Wave;
 using System.Diagnostics;
 using WinWisper.Resources;
 using System.Globalization;
@@ -24,11 +20,11 @@ namespace WinWisper
 
         Dictionary<string, string> models = new Dictionary<string, string>
         {
-            { "Large", "ggml-large.bin" },
-            { "Medium", "ggml-medium.bin" },
-            { "Small", "ggml-small.bin" },
-            { "Base", "ggml-base.bin" },
-            { "Tiny", "ggml-tiny.bin" }
+            { "Large", "large-v2" },
+            { "Medium", "medium" },
+            { "Small", "small" },
+            { "Base", "base" },
+            { "Tiny", "tiny" }
         };
 
         Dictionary<string, string> languages = new Dictionary<string, string>
@@ -139,9 +135,11 @@ namespace WinWisper
             InitializeComponent();
 
             // Populate ComboBoxes
-            cmbThreads.Items.AddRange(new object[] { 1, 2, 4, 8, 16, 32 });
-            cmbProcessor.Items.AddRange(new object[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 });
-            cmbOutputFormat.Items.AddRange(new string[] { "txt", "vtt", "srt", "wts" });
+            cmbThreads.Items.AddRange(new object[] { 0, 1, 2, 4, 8, 16, 32 });
+            cmbOutputFormat.Items.AddRange(new string[] { "txt", "vtt", "srt", "tsv", "json" });
+            cmbDevice.Items.AddRange(new string[] { "auto", "cpu", "cuda" });
+            cmbDeviceID.Items.AddRange(new object[] { 0, 1, 2, 3, 4, 5 });
+            cmbVADFilter.Items.AddRange(new object[] { Resources.Strings.Yes, Resources.Strings.No });
 
             foreach (var model in models.Keys)
             {
@@ -155,10 +153,12 @@ namespace WinWisper
 
             // Set default values
             cmbModel.SelectedIndex = 3; // ggml-base.bin
-            cmbThreads.SelectedIndex = 2; // 4 (recommended)
-            cmbProcessor.SelectedIndex = 0; // 1 (recommended)
+            cmbThreads.SelectedIndex = 0; // 0 (recommended)
             cmbOutputFormat.SelectedIndex = 0; // txt
             cmbLanguage.SelectedIndex = 7; // ja
+            cmbDevice.SelectedIndex = 0; //auto
+            cmbDeviceID.SelectedIndex = 0; //0
+            cmbVADFilter.SelectedIndex = 1; //いいえ
         }
 
         private async void button1_Click(object sender, EventArgs e)
@@ -170,8 +170,8 @@ namespace WinWisper
                 return;
             }
 
-            string selectedModel = models[cmbModel.SelectedItem.ToString()];
-            if (!File.Exists(selectedModel))
+            string selectedModel = cmbModel.SelectedItem.ToString();
+            if (selectedModel == "Large" && !Directory.Exists("whisper_ctranslate2\\models\\models--guillaumekln--faster-whisper-large-v2"))
             {
                 //Largeモデルを使用するにはプロ版が必要です
                 MessageBox.Show(Resources.Strings.Message_Need_Pro_Version);
@@ -197,38 +197,10 @@ namespace WinWisper
             for (int i = 0; i < fileList.Items.Count; i++)
             {
                 string inputFile = fileList.Items[i].ToString();
-                string outputWavPath = Path.ChangeExtension(inputFile, ".temp.wav");
-                await ConvertToWavAsync(inputFile, outputWavPath);
-                wavFiles.Add(outputWavPath);
+                wavFiles.Add(inputFile);
             }   
 
             await RunWhisperAsync(wavFiles);
-
-            foreach (string file in wavFiles)
-            {
-                //出力テキストをリネーム
-                string selectedOutputFormat = cmbOutputFormat.SelectedItem.ToString();
-                string outFilePath = file +"." + selectedOutputFormat;
-                if (File.Exists(outFilePath))
-                {
-                    string path1 = Path.GetFileNameWithoutExtension(outFilePath);
-                    string path2 = Path.GetFileNameWithoutExtension(path1);
-                    string path3 = Path.GetFileNameWithoutExtension(path2);
-                    string finalPath = Path.GetDirectoryName(outFilePath) + "\\" + path3 + "." + selectedOutputFormat;
-                    Debug.Print(Path.GetFileNameWithoutExtension(finalPath));
-
-                    //すでにファイルが存在するなら削除しとく
-                    if (File.Exists(finalPath))
-                    {
-                        File.Delete(finalPath);
-                    }
-
-                    File.Move(outFilePath, finalPath);
-                }
-
-                //一時的なwavファイルを全部消す
-                File.Delete(file);
-            }
 
             progressBar.Value = 10;
             labelProgress.Text = Resources.Strings.Complete;//完了
@@ -238,61 +210,18 @@ namespace WinWisper
             processingFiles = false;
         }
 
-        private void btnTranscribe_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private async Task ConvertToWavAsync(string inputPath, string outputPath)
-        {
-            string extension = Path.GetExtension(inputPath).ToLower();
-
-            if (extension == ".mp4" || extension == ".avi")
-            {
-                await ConvertVideoToWavAsync(inputPath, outputPath);
-            }
-            else
-            {
-                await ConvertAudioToWavAsync(inputPath, outputPath);
-            }
-        }
-
-        private async Task ConvertAudioToWavAsync(string inputPath, string outputPath)
-        {
-            using (var reader = new MediaFoundationReader(inputPath))
-            using (var resampler = new MediaFoundationResampler(reader, new WaveFormat(16000, 1)))
-            {
-                WaveFileWriter.CreateWaveFile(outputPath, resampler);
-            }
-        }
-
-        private async Task ConvertVideoToWavAsync(string inputPath, string outputPath)
-        {
-            string tempOutputPath = Path.ChangeExtension(inputPath, ".temp.v.wav");
-
-            var inputFile = new MediaFile { Filename = inputPath };
-            var outputFile = new MediaFile { Filename = tempOutputPath };
-
-            using (var engine = new Engine())
-            {
-                engine.GetMetadata(inputFile);
-                engine.Convert(inputFile, outputFile);
-            }
-
-            await ConvertAudioToWavAsync(tempOutputPath, outputPath);
-            File.Delete(tempOutputPath);
-        }
-
         private async Task RunWhisperAsync(List<string> wavFiles)
         {
             string selectedModel = models[cmbModel.SelectedItem.ToString()];
             string selectedLanguage = languages[cmbLanguage.SelectedItem.ToString()];
             int selectedThreads = (int)cmbThreads.SelectedItem;
-            int selectedProcessors = (int)cmbProcessor.SelectedItem;
             string selectedOutputFormat = cmbOutputFormat.SelectedItem.ToString();
+            string selectedDevice = cmbDevice.SelectedItem.ToString();
+            int selectedDeviceID = (int)cmbDeviceID.SelectedItem;
+            string useVADFilter = cmbVADFilter.SelectedIndex == 0 ? "True" : "False";
 
-            string whisperCommand = "main";
-            string whisperArguments = $"-m \"{selectedModel}\" -t {selectedThreads} -p {selectedProcessors} -o{selectedOutputFormat} -l {selectedLanguage}";
+            string whisperCommand = "whisper_ctranslate2\\whisper_ctranslate2";
+            string whisperArguments = $"--model \"{selectedModel}\" --threads {selectedThreads} --output_format {selectedOutputFormat} --language {selectedLanguage} --device {selectedDevice} --device_index {selectedDeviceID} --vad_filter {useVADFilter} --model_dir whisper_ctranslate2/models --local_files_only True";
             foreach (string wavFile in wavFiles)
             {
                 whisperArguments += $" \"{wavFile}\"";
@@ -424,6 +353,7 @@ namespace WinWisper
 
         private void ApplyLocalization()
         {
+            //ローカライズを適用
             this.Text = Resources.Strings.FormTitle;
             ファイルToolStripMenuItem.Text = Resources.Strings.Menu_File;
             ファイルを追加ToolStripMenuItem.Text = Resources.Strings.Add_Files;
@@ -431,30 +361,37 @@ namespace WinWisper
             選択した項目を削除ToolStripMenuItem.Text = Resources.Strings.Delete_Selected_Items;
             labelModel.Text = Resources.Strings.Model;
             labelThreads.Text = Resources.Strings.Num_Threads;
-            labelProcesses.Text = Resources.Strings.Num_Processes;
             labelLanguage.Text = Resources.Strings.Language;
             labelOutput.Text = Resources.Strings.Output_Format;
             btnTranscribe.Text = Resources.Strings.Start_Transcribe;
+            labelDevice.Text = Resources.Strings.Device;
+            labelDeviceID.Text = Resources.Strings.DeviceID;
+            labelVADFilter.Text = Resources.Strings.VADFilter;
         }
 
         private void MyWhisper_Load(object sender, EventArgs e)
         {
-
+            //ローカライズ、設定を読み込む
             ApplyLocalization();
             cmbModel.SelectedItem = Properties.Settings.Default.SelectedModel;
             cmbThreads.SelectedItem = Properties.Settings.Default.SelectedThreads;
-            cmbProcessor.SelectedItem = Properties.Settings.Default.SelectedProcessors;
             cmbOutputFormat.SelectedItem = Properties.Settings.Default.SelectedOutputFormat;
             cmbLanguage.SelectedItem = languages.FirstOrDefault(x => x.Value == Properties.Settings.Default.SelectedLanguage).Key;
+            cmbDevice.SelectedIndex = Properties.Settings.Default.SelectedDevice;
+            cmbDeviceID.SelectedIndex = Properties.Settings.Default.SelectedDeviceID;
+            cmbVADFilter.SelectedIndex = Properties.Settings.Default.SelectedVADFilter;
         }
 
         private void MyWhisper_FormClosing(object sender, FormClosingEventArgs e)
         {
+            //設定をセーブする
             Properties.Settings.Default.SelectedModel = cmbModel.SelectedItem.ToString();
             Properties.Settings.Default.SelectedThreads = (int)cmbThreads.SelectedItem;
-            Properties.Settings.Default.SelectedProcessors = (int)cmbProcessor.SelectedItem;
             Properties.Settings.Default.SelectedOutputFormat = cmbOutputFormat.SelectedItem.ToString();
             Properties.Settings.Default.SelectedLanguage = languages[cmbLanguage.SelectedItem.ToString()];
+            Properties.Settings.Default.SelectedDevice = cmbDevice.SelectedIndex;
+            Properties.Settings.Default.SelectedDeviceID = cmbDeviceID.SelectedIndex;
+            Properties.Settings.Default.SelectedVADFilter = cmbVADFilter.SelectedIndex;
             Properties.Settings.Default.Save();
         }
 
@@ -463,6 +400,7 @@ namespace WinWisper
             Form_About formAbout = new Form_About();
             formAbout.ShowDialog();
         }
+
     }
 }
 

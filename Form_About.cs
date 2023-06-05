@@ -24,5 +24,6 @@ namespace WinWisper
             //ブラウザで開く
             System.Diagnostics.Process.Start("https://icons8.com/icon/7LhMaNDFgoYK/create");
         }
+
     }
 }

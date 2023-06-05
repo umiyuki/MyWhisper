@@ -49,18 +49,6 @@ namespace WinWisper.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("1")]
-        public int SelectedProcessors {
-            get {
-                return ((int)(this["SelectedProcessors"]));
-            }
-            set {
-                this["SelectedProcessors"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("txt")]
         public string SelectedOutputFormat {
             get {
@@ -80,6 +68,42 @@ namespace WinWisper.Properties {
             }
             set {
                 this["SelectedLanguage"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int SelectedDevice {
+            get {
+                return ((int)(this["SelectedDevice"]));
+            }
+            set {
+                this["SelectedDevice"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int SelectedDeviceID {
+            get {
+                return ((int)(this["SelectedDeviceID"]));
+            }
+            set {
+                this["SelectedDeviceID"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int SelectedVADFilter {
+            get {
+                return ((int)(this["SelectedVADFilter"]));
+            }
+            set {
+                this["SelectedVADFilter"] = value;
             }
         }
     }
