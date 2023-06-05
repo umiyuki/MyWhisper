@@ -16,11 +16,10 @@ VisualStudio2019で普通にビルドできるハズです。アイコンファ�
 こちらからダウンロードしてicoファイルに変換してください。→
 <a target="_blank" href="https://icons8.com/icon/7LhMaNDFgoYK/create">Create</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a>
 
-別途Whisper.cppをビルドする必要があります。ビルドでできたmain.exeとwhisper.dllをアプリと同じフォルダに入れてください。
-https://github.com/ggerganov/whisper.cpp
+別途whisper-ctranslate2をPyInstallerでexeファイル作成してフォルダに入れる必要があります。
+https://github.com/Softcatala/whisper-ctranslate2
 
-また、モデルファイルもダウンロードして同じフォルダに入れる必要があります。以下からggml-large.bin, ggml-medium.bin, ggml-small.bin, ggml-base.bin, ggml-tiny.binをDLします。
-https://huggingface.co/datasets/ggerganov/whisper.cpp/tree/main
+また、モデルファイルや、cudnn、cuBLAS、zlibwapiのDLLもダウンロードしてwhisper-ctranslate2のexeファイルのあるフォルダに入れる必要があります。
 
 アプリの使用方法はこちらの販売ページに書いてあるものを参考にしてください。→https://umiyuki.booth.pm/items/4663311
 
