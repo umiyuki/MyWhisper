@@ -31,6 +31,8 @@ namespace WinWisper
                 Thread.CurrentThread.CurrentUICulture = new CultureInfo("en");
             }*/
 
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo("en");
+
             Application.Run(new MyWhisper());
         }
     }

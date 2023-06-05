@@ -188,7 +188,7 @@ namespace WinWisper
 
             progressBar.Maximum = 10;
             progressBar.Value = 0;
-            labelProgress.Text = "処理中";
+            labelProgress.Text = Resources.Strings.Processing;//処理中
 
             //最初にオーディオファイルを全部wavに変換する
             List<string> wavFiles = new List<string>();
@@ -231,7 +231,7 @@ namespace WinWisper
             }
 
             progressBar.Value = 10;
-            labelProgress.Text = "完了";
+            labelProgress.Text = Resources.Strings.Complete;//完了
             //ボタン押せるようにする
             btnTranscribe.Enabled = true;
             menuStrip1.Enabled = true;
