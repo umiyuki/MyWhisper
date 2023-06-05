@@ -28,5 +28,11 @@ https://huggingface.co/datasets/ggerganov/whisper.cpp/tree/main
 Whisper by OpenAI
 https://github.com/openai/whisper
 
-Whisper.cpp by ggerganov
-https://github.com/ggerganov/whisper.cpp
+CTranslate2 by guillaumekln
+https://github.com/OpenNMT/CTranslate2/
+
+faster-whisper by guillaumekln
+https://github.com/guillaumekln/faster-whisper
+
+whisper-ctranslate2 by jordimas
+https://github.com/Softcatala/whisper-ctranslate2
